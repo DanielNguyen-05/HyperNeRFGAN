@@ -1,20 +1,24 @@
 name: hypernerfgan
 channels:
   - pytorch
+  - conda-forge
   - defaults
+
 dependencies:
-  - python=3.9
+  - python=3.10
   - pip
+  - numpy
+  - scipy
   - pytorch
   - torchvision
-  - imageio
   - protobuf=3.20.1
+  - imageio
+  - pip<24.1
   - pip:
       - imageio-ffmpeg
       - hydra-core==1.0.6
       - click==7.1.2
-      - scipy==1.6.1
-      - ninja==1.10.0
+      - ninja
       - tensorboard==2.4.1
       - tqdm==4.59.0
       - gitpython
