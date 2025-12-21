@@ -9,10 +9,10 @@ from tqdm import tqdm
 
 batch_size = 256
 num_images = 500
-pickle_name = "carla_improved_1600.pkl"
-pickle_path = pathlib.Path(f"../data/pickles/{pickle_name}.pkl")
-img_path = pathlib.Path(f"../samples/images/{pickle_name}")
-interpolation_path = pathlib.Path(f"../samples/interpolation/{pickle_name}")
+pickle_name = "carla_improved_1600"
+pickle_path = pathlib.Path(f"./data/pickles/{pickle_name}.pkl")
+img_path = pathlib.Path(f"./samples/images/{pickle_name}")
+interpolation_path = pathlib.Path(f"./samples/interpolation/{pickle_name}")
 
 img_path.mkdir(parents=True, exist_ok=True)
 interpolation_path.mkdir(parents=True, exist_ok=True)

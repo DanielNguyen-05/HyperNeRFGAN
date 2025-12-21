@@ -14,8 +14,8 @@ env:
 
 num_gpus: 4
 dataset:
-  source_path: ${env.datasets_dir}/${dataset.name}
-  target_path: data/${dataset.name}
+  source_path: ${env.datasets_dir}/${dataset.name}.zip
+  target_path: data/${dataset.name}.zip
 print_only: false
 
 project_release_dir:
@@ -37,7 +37,7 @@ train_args:
   augpipe: crop
   p: 0.5
   mirror: 1
-  hydra_cfg_name: "nerf-gan-carla.yml"
+  hydra_cfg_name: "nerf-gan-celeba.yml"
 
 train_args_str:
   _target_: src.infra.utils.cfg_to_args_str

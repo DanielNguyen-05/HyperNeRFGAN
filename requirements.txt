@@ -1,0 +1,13 @@
+torch>=1.10
+torchvision>=0.11
+matplotlib>=3.5
+tqdm>=4.60
+numpy==1.23.5
+opencv-python>=4.5
+imageio
+pandas>=1.3
+scikit-learn>=1.0
+scipy>=1.7
+Pillow>=8.4 
+requests>=2.26
+omegaconf
