@@ -7,8 +7,11 @@ outputs/
 inr_gan.egg-info/
 experiments/
 failed-experiments/
-data
 *.log
 notebooks/zoo.ipynb
 .ipynb_checkpoints/
 checkpoints/
+.DS_Store
+*.pyc
+.vscode/
+data
