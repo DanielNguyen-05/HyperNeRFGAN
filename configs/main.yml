@@ -37,7 +37,7 @@ train_args:
   augpipe: crop
   p: 0.5
   mirror: 1
-  hydra_cfg_name: "nerf-gan-celeba.yml"
+  hydra_cfg_name: "nerf-gan-carla.yml"
 
 train_args_str:
   _target_: src.infra.utils.cfg_to_args_str

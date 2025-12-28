@@ -19,7 +19,7 @@ import torch
 
 #----------------------------------------------------------------------------
 
-enabled = False                     # Enable the custom op by setting this to true.
+enabled = True                     # Enable the custom op by setting this to true.
 weight_gradients_disabled = False   # Forcefully disable computation of gradients with respect to the weights.
 
 @contextlib.contextmanager
@@ -45,15 +45,7 @@ def conv_transpose2d(input, weight, bias=None, stride=1, padding=0, output_paddi
 #----------------------------------------------------------------------------
 
 def _should_use_custom_op(input):
-    assert isinstance(input, torch.Tensor)
-    if (not enabled) or (not torch.backends.cudnn.enabled):
-        return False
-    if input.device.type != 'cuda':
-        return False
-    if any(torch.__version__.startswith(x) for x in ['1.7.', '1.8.', '1.9']):
-        return True
-    warnings.warn(f'conv2d_gradfix not supported on PyTorch {torch.__version__}. Falling back to torch.nn.functional.conv2d().')
-    return False
+    return True
 
 def _tuple_of_ints(xs, ndim):
     xs = tuple(xs) if isinstance(xs, (tuple, list)) else (xs,) * ndim

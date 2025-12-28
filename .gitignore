@@ -14,4 +14,7 @@ checkpoints/
 .DS_Store
 *.pyc
 .vscode/
-data
+data/
+pretrained_running/
+retrained_running/
+ablation_running/

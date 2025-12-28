@@ -31,6 +31,17 @@ class UserError(Exception):
 
 #----------------------------------------------------------------------------
 
+import numpy as np
+
+if not hasattr(np, "float"):
+    np.float = float
+if not hasattr(np, "int"):
+    np.int = int
+if not hasattr(np, "bool"):
+    np.bool = bool
+if not hasattr(np, "object"): 
+    np.object = object 
+
 def setup_training_loop_kwargs(
     # General options (not included in desc).
     gpus       = None, # Number of GPUs: <int>, default = 1 gpu
@@ -163,7 +174,7 @@ def setup_training_loop_kwargs(
 
     cfg_specs = {
         'auto':      dict(ref_gpus=-1, kimg=25000,  mb=-1, mbstd=-1, fmaps=-1,  lrate=-1,     r1_gamma=-1,   ema=-1,  ramp=0.05, map=2), # Populated dynamically based on resolution and GPU count.
-        'nerf':    dict(ref_gpus=gpus, kimg=25000,  mb=4, mbstd=4,  fmaps=1,   lrate=0.0025, r1_gamma=0.001,    ema=20,  ramp=0.05, map=2, width=128, num_layers=4, perturb=0.0, raw_noise_std=0.0, n_samples=16, n_importance=0, white_bkgd=True, patch_size=None),
+        'nerf':    dict(ref_gpus=gpus, kimg=200,  mb=4, mbstd=4,  fmaps=1,   lrate=0.0025, r1_gamma=0.001,    ema=20,  ramp=0.05, map=2, width=128, num_layers=4, perturb=0.0, raw_noise_std=0.0, n_samples=16, n_importance=0, white_bkgd=True, patch_size=None),
         'stylegan2': dict(ref_gpus=8,  kimg=25000,  mb=32, mbstd=4,  fmaps=1,   lrate=0.002,  r1_gamma=10,   ema=10,  ramp=None, map=8), # Uses mixed-precision, unlike the original StyleGAN2.
         'paper256':  dict(ref_gpus=8,  kimg=25000,  mb=64, mbstd=8,  fmaps=0.5, lrate=0.0025, r1_gamma=1,    ema=20,  ramp=None, map=8),
         'paper512':  dict(ref_gpus=8,  kimg=25000,  mb=64, mbstd=8,  fmaps=1,   lrate=0.0025, r1_gamma=0.5,  ema=20,  ramp=None, map=8),
@@ -244,7 +255,8 @@ def setup_training_loop_kwargs(
         args.D_kwargs.architecture = 'orig' # disable residual skip connections
 
     if 'r1_gamma' in hydra_cfg.loss_kwargs:
-        r1_gamma = hydra_cfg.loss_kwargs.r1_gamma
+        # r1_gamma = hydra_cfg.loss_kwargs.r1_gamma
+        r1_gamma = 0.5
         assert isinstance(r1_gamma, float)
         if not r1_gamma >= 0:
             raise UserError('r1_gamma must be non-negative')

@@ -574,6 +574,14 @@ class SynthesisBlock(torch.nn.Module):
         if self.in_channels == 0:
             x = self.conv1(x, conv1_w, fused_modconv=fused_modconv, **layer_kwargs)
         elif self.architecture == 'resnet':
+
+            print("skip layer:", type(self.skip))
+            print("skip has weight:", hasattr(self.skip, "weight"))
+            print("skip.weight is None:", getattr(self.skip, "weight", "NA") is None)
+            print("x is None:", x is None)
+            print("x shape/dtype:", None if x is None else (x.shape, x.dtype, x.device))
+            print("skip dir keys sample:", [k for k in dir(self.skip) if "weight" in k or k in ["w","conv"]][:30])
+
             y = self.skip(x, gain=np.sqrt(0.5))
             x = self.conv0(x, next(w_iter), fused_modconv=fused_modconv, **layer_kwargs)
             x = self.conv1(x, next(w_iter), fused_modconv=fused_modconv, gain=np.sqrt(0.5), **layer_kwargs)
